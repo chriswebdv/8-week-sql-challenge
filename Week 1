@@ -91,3 +91,10 @@
 
 ---
 
+Query #3**
+
+SELECT sales.customer_id AS cust, menu.product_name AS prod, sales.product_id, sales.order_date
+FROM sales
+LEFT OUTER JOIN menu 
+ON sales.product_id = menu.product_id
+ORDER BY cust, prod;
