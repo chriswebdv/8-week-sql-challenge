@@ -100,3 +100,10 @@ ON sales.product_id = menu.product_id
 ORDER BY date
 LIMIT 3;
 
+Query #4**
+
+SELECT COUNT(s.product_id) pi, m.product_name pn
+FROM dannys_diner.sales s
+LEFT JOIN dannys_diner.menu m ON s.product_id = m.product_id
+GROUP BY pn
+LIMIT 1;
