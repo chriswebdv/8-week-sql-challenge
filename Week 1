@@ -107,3 +107,11 @@ FROM dannys_diner.sales s
 LEFT JOIN dannys_diner.menu m ON s.product_id = m.product_id
 GROUP BY pn
 LIMIT 1;
+
+Query #5**
+
+SELECT s.customer_id ci, COUNT(s.order_date) od, m.product_name pn
+FROM dannys_diner.sales s
+LEFT JOIN dannys_diner.menu m ON s.product_id = m.product_id
+GROUP BY ci, pn
+ORDER BY 2 DESC;
