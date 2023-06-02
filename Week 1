@@ -139,3 +139,15 @@ where order_date < (
                     )
 order by order_date desc
 limit 1;
+
+-- 8. What is the total items and amount spent for each member before they became a member?
+
+select sales.customer_id, count(sales.product_id), sum(menu.price)
+from dannys_diner.sales 
+join dannys_diner.menu on sales.product_id = menu.product_id
+where order_date < (
+              select join_date
+              from dannys_diner.members
+			  limit 1
+                    )
+group by sales.customer_id;
