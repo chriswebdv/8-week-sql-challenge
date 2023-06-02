@@ -115,3 +115,15 @@ FROM dannys_diner.sales s
 LEFT JOIN dannys_diner.menu m ON s.product_id = m.product_id
 GROUP BY ci, pn
 ORDER BY 2 DESC;
+
+-- 6. Which item was purchased first by the customer after they became a member?
+
+select distinct product_id, order_date
+from dannys_diner.sales
+where order_date >= (
+              select join_date
+              from dannys_diner.members
+			  limit 1
+                    )
+order by order_date asc
+limit 1;
