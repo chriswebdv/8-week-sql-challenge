@@ -151,3 +151,15 @@ where order_date < (
 			  limit 1
                     )
 group by sales.customer_id;
+
+-- 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+
+select sales.customer_id, 
+       ((sum(menu.price)*10) +  (select (sum(price)*20)
+			                    from dannys_diner.menu
+				                where menu.product_name = 'sushi')) as total_points
+                  		 
+from dannys_diner.sales
+join dannys_diner.menu on sales.product_id = menu.product_id
+where not menu.product_name = 'sushi'                   
+group by sales.customer_id;
