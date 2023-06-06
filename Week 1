@@ -163,3 +163,15 @@ from dannys_diner.sales
 join dannys_diner.menu on sales.product_id = menu.product_id
 where not menu.product_name = 'sushi'                   
 group by sales.customer_id;
+
+-- 10. In the first week after a customer joins the program (including their join date) 
+-- they earn 2x points on all items, not just sushi 
+-- how many points do customer A and B have at the end of January?
+
+select members.customer_id, (select (price * 2)
+							from dannys_diner.menu
+							limit 1) as total_points
+from dannys_diner.sales
+join dannys_diner.members on sales.customer_id = members.customer_id
+where sales.order_date >= members.join_date and sales.order_date <= '2021-01-31'
+group by members.customer_id;
